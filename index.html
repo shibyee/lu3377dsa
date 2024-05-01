@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+        .photo-button-signal {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+        .photo-button-signal img {
+            max-width: 100%;
+            height: auto;
+        }
+        .photo-button-game {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .photo-button-game img {
+            max-width: 100%;
+            height: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        #result {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
+        }
+        #countdown {
+            position: absolute;
+            top: 73%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button class="photo-button-signal" id="photo-button-signal">
+        <img src="lucky_signal.png">
+    </button>
+    <a href="https://1weawx.com/casino/play/1play_1play_luckyjet" target="_blank" class="photo-button-game">
+        <img src="lucky_game.png">
+    </a>
+    <img src="lucky_bg.png">
+    <div id="result"></div>
+    <div id="countdown"></div>
+
+    <script>
+        const resultElement = document.getElementById('result');
+        const countdownElement = document.getElementById('countdown');
+        const luckyButton = document.querySelector('.photo-button-signal');
+        let lastClickTime = 0;
+        let countdownInterval;
+
+        luckyButton.addEventListener('click', () => {
+            const currentTime = new Date().getTime();
+
+            if (currentTime - lastClickTime >= 60000) {
+                const chance = Math.random() * 100;
+                let randomNumber;
+
+                if (chance < 20) {
+                    randomNumber = (Math.random() * (1.99 - 1.00) + 1.00).toFixed(2);
+                } else {
+                    randomNumber = (Math.random() * (3.50 - 2.00) + 2.00).toFixed(2);
+                }
+
+                // Show random number result
+                resultElement.textContent = randomNumber + 'X';
+
+                lastClickTime = currentTime;
+
+                // Start countdown
+                let count = 60;
+                countdownElement.textContent = count + ' seconds';
+                countdownInterval = setInterval(() => {
+                    count--;
+                    if (count >= 0) {
+                        countdownElement.textContent = count + ' seconds';
+                    } else {
+                        clearInterval(countdownInterval);
+                        countdownElement.textContent = '';
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
